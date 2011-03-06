@@ -259,7 +259,7 @@ static SDL_Surface* convertImage(SDL_Surface* surf)
     {
       // Convert the image to the display buffer format, for faster
       // blitting
-      SDL_Surface *surf2 = SDL_DisplayFormat(surf);
+      SDL_Surface *surf2 = SDL_DisplayFormatAlpha(surf);
       SDL_FreeSurface(surf);
       surf = surf2;
     }
