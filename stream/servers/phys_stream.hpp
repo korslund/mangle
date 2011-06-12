@@ -14,6 +14,7 @@ class PhysFile : public Stream
  public:
   PhysFile(PHYSFS_file *inp) : file(inp)
     {
+      isReadable = true;
       isSeekable = true;
       hasPosition = true;
       hasSize = true;

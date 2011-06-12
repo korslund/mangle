@@ -21,6 +21,7 @@ class StdStream : public Stream
  StdStream(std::istream *_inf)
    : inf(_inf)
   {
+    isReadable = true;
     isSeekable = true;
     hasPosition = true;
     hasSize = true;

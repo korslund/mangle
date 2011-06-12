@@ -22,6 +22,7 @@ class PureFilter : public Stream
   void setStream(StreamPtr _src)
     {
       src = _src;
+      isReadable = src->isReadable;
       isSeekable = src->isSeekable;
       isWritable = src->isWritable;
       hasPosition = src->hasPosition;

@@ -19,6 +19,7 @@ class OgreStream : public Stream
  public:
  OgreStream(Ogre::DataStreamPtr _inp) : inp(_inp)
   {
+    isReadable = true;
     isSeekable = true;
     hasPosition = true;
     hasSize = true;

@@ -27,6 +27,7 @@ class MemoryStream : public Stream
  MemoryStream(const void *ptr, size_t len)
    : data(ptr), length(len), pos(0)
   {
+    isReadable = true;
     isSeekable = true;
     hasPosition = true;
     hasSize = true;
@@ -36,6 +37,7 @@ class MemoryStream : public Stream
   MemoryStream()
     : data(NULL), length(0), pos(0)
   {
+    isReadable = true;
     isSeekable = true;
     hasPosition = true;
     hasSize = true;

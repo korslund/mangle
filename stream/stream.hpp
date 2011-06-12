@@ -33,10 +33,10 @@ class Stream
   /// If true, the getPtr() functions work
   bool hasPtr;
 
-  /// Initialize all bools to false by default, except isReadable.
+  /// Mark all features as disabled by default.
   Stream() :
     isSeekable(false), hasPosition(false), hasSize(false),
-    isWritable(false), isReadable(true), hasPtr(false) {}
+    isWritable(false), isReadable(false), hasPtr(false) {}
 
   /// Virtual destructor
   virtual ~Stream() {}

@@ -28,6 +28,7 @@ class SliceStream : public Stream
       hasSize = true;
       hasPtr = src->hasPtr;
       isWritable = src->isWritable;
+      isReadable = src->isReadable;
     }
 
   size_t read(void *buf, size_t count)
