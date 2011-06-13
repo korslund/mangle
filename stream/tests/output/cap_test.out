@@ -50,3 +50,14 @@ Reading 2 bytes
 Result: ' s'
 Pos: 12
 Eof: 1
+
+Again:
+--------
+Size: 5
+Pos: 0
+Eof: 0
+
+Reading 5 bytes
+Result: 'a tes'
+Pos: 5
+Eof: 1

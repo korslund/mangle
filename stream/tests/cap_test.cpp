@@ -31,8 +31,14 @@ int main()
   test(orig);
 
   orig->seek(4);
-  StreamPtr cap(new CapStream(orig,12));
+  CapStreamPtr cap(new CapStream(orig,12));
   cout << "\nCapped stream:\n--------\n";
+  test(cap);
+
+  // Test reusability & exact read size (5 bytes)
+  orig->seek(8);
+  cap->setStream(orig, 5);
+  cout << "\nAgain:\n--------\n";
   test(cap);
 
   return 0;

@@ -26,6 +26,8 @@ namespace Stream {
     Premature eof()s in the source stream, ie. running out of data
     before 'size' has been reached, will cause an exception to be
     thrown.
+
+    Instances are fully reusable through setStream().
  */
 class CapStream : public Stream
 {
@@ -34,9 +36,18 @@ protected:
   size_t total, pos;
 
  public:
+  CapStream() : total(0), pos(0) {}
   CapStream(StreamPtr _src, size_t _size)
-    : src(_src), total(_size), pos(0)
   {
+    setStream(_src, _size);
+  }
+
+  void setStream(StreamPtr _src, size_t _size)
+  {
+    src = _src;
+    total = _size;
+    pos = 0;
+
     assert(src->isReadable);
 
     isReadable = true;
