@@ -27,6 +27,7 @@ public:
 
   Dummy() : count(0)
   {
+    isReadable = true;
   }
 
   size_t read(void *ptr, size_t num)
@@ -129,6 +130,7 @@ struct Dummy3 : Stream
 
   Dummy3() : pos(0)
   {
+    isReadable = true;
     hasPosition = true;
     isSeekable = true;
   }

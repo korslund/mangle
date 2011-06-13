@@ -1,6 +1,9 @@
 GCC=g++ -I../ -Wall -Werror
 
-all: ogre_client_test audiere_client_test memory_server_test buffer_filter_test file_server_test slice_filter_test file_write_test iostream_test
+all: memory_server_test buffer_filter_test file_server_test slice_filter_test file_write_test iostream_test cap_test
+
+# CURRENTLY DISABLED for dependency reasons (the examples should be OK)
+# ogre_client_test audiere_client_test
 
 I_OGRE=$(shell pkg-config --cflags OGRE)
 L_OGRE=$(shell pkg-config --libs OGRE)
@@ -28,6 +31,9 @@ buffer_filter_test: buffer_filter_test.cpp ../stream.hpp ../servers/memory_strea
 	$(GCC) $< -o $@
 
 slice_filter_test: slice_filter_test.cpp ../stream.hpp ../servers/memory_stream.hpp ../filters/slice_stream.hpp
+	$(GCC) $< -o $@
+
+cap_test: cap_test.cpp ../stream.hpp ../servers/memory_stream.hpp ../filters/cap_stream.hpp
 	$(GCC) $< -o $@
 
 clean:
