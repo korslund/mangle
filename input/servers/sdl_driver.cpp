@@ -27,6 +27,10 @@ void SDLDriver::capture()
         case SDL_MOUSEMOTION:
           type = Event::EV_MouseMove;
           break;
+        case SDL_MOUSEBUTTONDOWN:
+          type = Event::EV_MouseDown;
+          index = evt.button.button;
+          break;
           // Add more event types later
         }
 
