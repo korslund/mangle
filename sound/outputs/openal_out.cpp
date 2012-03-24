@@ -30,8 +30,8 @@ static char tmp_buffer[BSIZE];
 // Number of buffers used (per sound) for streaming sounds. Each
 // buffer is of size BSIZE. Increasing this will make streaming sounds
 // more fault tolerant against temporary lapses in call to update(),
-// but will also increase memory usage. 4 should be ok.
-const int STREAM_BUF_NUM = 4;
+// but will also increase memory usage.
+const int STREAM_BUF_NUM = 30;
 
 static void fail(const std::string &msg)
 { throw std::runtime_error("OpenAL exception: " + msg); }
@@ -101,7 +101,7 @@ class Mangle::Sound::OpenAL_Sound : public Sound
   ALuint inst;
 
   // Buffers. Only the first is used for non-streaming sounds.
-  ALuint bufferID[4];
+  ALuint bufferID[STREAM_BUF_NUM];
 
   // Number of buffers used
   int bufNum;
