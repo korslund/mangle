@@ -1,8 +1,7 @@
 #ifndef MANGLE_VFS_H
 #define MANGLE_VFS_H
 
-#include "../stream/stream.hpp"
-#include <string>
+#include "stream_factory.hpp"
 #include <vector>
 
 namespace Mangle {
@@ -33,9 +32,9 @@ typedef boost::shared_ptr<FileInfo> FileInfoPtr;
 typedef boost::shared_ptr<FileInfoList> FileInfoListPtr;
 
 /** An interface to any file system or other provider of named data
-    streams
+    streams. This is mostly intended for read-only data.
 */
-class VFS
+class VFS : public StreamFactory
 {
  public:
   // Feature options. These should be set in the constructor.
@@ -48,13 +47,6 @@ class VFS
 
   /// If true, the file system is case sensitive
   bool isCaseSensitive;
-
-  /// Virtual destructor
-  virtual ~VFS() {}
-
-  /// Open a new data stream. Deleting the object (letting all the
-  /// pointers to it go out of scope) should be enough to close it.
-  virtual Stream::StreamPtr open(const std::string &name) = 0;
 
   /// Check for the existence of a file
   virtual bool isFile(const std::string &name) const = 0;
