@@ -19,7 +19,7 @@ class StringWriter : public Stream
 
  public:
   StringWriter(std::string &_out)
-    : out(_out);
+    : out(_out)
   {
     isSeekable = false;
     hasPosition = false;
