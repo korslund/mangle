@@ -62,6 +62,21 @@ class Stream
   */
   virtual size_t write(const void *buf, size_t count) { assert(0); return 0; }
 
+  /** Inform a writable stream that you intend to write at least
+      'count' bytes. Some streams may use this to preallocate memory
+      buffers, allocate contiguous disk space, or whatever.
+
+      Reserves are counted from the current position. So if you write
+      100 bytes, then call reserve(100), it counts as reserving a
+      total of 200 bytes for the stream.
+
+      Calling or implementing this is entirely optional. It is
+      provided only as a possible means of optimization.
+      Implementations should not rely on the given 'count' to
+      represent exactly the number of bytes to be written.
+   */
+  virtual void reserve(size_t count) {}
+
   /// Flush an output stream. Does nothing for non-writing streams.
   virtual void flush() {}
 

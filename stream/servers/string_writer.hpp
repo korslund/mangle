@@ -9,7 +9,8 @@ namespace Stream {
 
 /** A stream that writes to an std::string. You provide the string
     yourself, so if you are writing large amounts of data you can
-    optimize by calling string::reserve() first.
+    optimize by calling string::reserve() first. You can also call
+    string::reserve() indirectly through Stream::reserve().
 
     The data is appended to any existing data in the string.
  */
@@ -32,6 +33,11 @@ class StringWriter : public Stream
   {
     out.append((const char*)buf, len);
     return len;
+  }
+
+  void reserve(size_t count)
+  {
+    out.reserve(out.size() + count);
   }
 };
 

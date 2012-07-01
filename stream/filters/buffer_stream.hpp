@@ -1,20 +1,35 @@
 #ifndef MANGLE_STREAM_BUFFER_H
 #define MANGLE_STREAM_BUFFER_H
 
-#include "../servers/memory_stream.hpp"
-#include <vector>
+#include "../servers/buffer_writer.hpp"
 
 namespace Mangle {
 namespace Stream {
 
-/** A Stream that reads another Stream into a buffer, and serves it as
-    a MemoryStream. Might be expanded with other capabilities later.
+/** BufferStream is a stream used specifically for reading another
+    stream into a memory buffer.
+
+    The constructor is given a pointer to another stream, and that
+    stream is then read into memory. The class handles cases where
+    there is no known size and the input must be read in chuncks until
+    EOF. However if the size IS known (ie. input->hasSize == true),
+    the class is optimized to use one allocation and one read.
+
+    After the constructor has finished, the class acts as an otherwise
+    normal BufferWriter (full read/write memory stream) with the
+    starting seek position set to 0.
+
+    Typically you only need a read-only buffer after the initial
+    setup. In that case it might be a good idea access the class
+    through its MemoryStream ancestor class. Ie.:
+
+    MemoryStreamPtr membuf(new BufferSream(myInput));
+
+    ... use membuf as a MemoryStream from here on
  */
 
-class BufferStream : public MemoryStream
+class BufferStream : public BufferWriter
 {
-  std::vector<char> buffer;
-
  public:
   /*
     input = stream to copy
@@ -33,38 +48,31 @@ class BufferStream : public MemoryStream
           // Calculate how much is left of the stream
           size_t left = input->size() - input->tell();
 
-          // Allocate the buffer and fill it
-          buffer.resize(left);
-          input->read(&buffer[0], left);
+          // Allocate and read the data
+          input->read(getWPtr(left), left);
         }
       else
         {
           // We DON'T know how big the stream is. We'll have to read
           // it in increments.
-          size_t len=0, newlen;
 
+          std::vector<char> buf(ADD);
           while(!input->eof())
             {
-              // Read one block
-              newlen = len + ADD;
-              buffer.resize(newlen);
-              size_t read = input->read(&buffer[len], ADD);
+              // Read one block of input data
+              size_t read = input->read(&buf[0], ADD);
 
-              // Increase the total length
-              len += read;
+              // Write it to ourself
+              write(&buf[0], read);
 
               // If we read less than expected, we should be at the
               // end of the stream
               assert(read == ADD || (read < ADD && input->eof()));
             }
-
-          // Downsize to match the real length
-          buffer.resize(len);
         }
 
-      // After the buffer has been filled, set up our MemoryStream
-      // ancestor to reference it.
-      set(&buffer[0], buffer.size());
+      // Reset the starting position to zero
+      seek(0);
     }
 };
 

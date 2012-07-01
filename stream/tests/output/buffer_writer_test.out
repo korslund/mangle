@@ -1,0 +1,27 @@
+Pos/Size: 0 / 0   Value: ''
+
+Writing 'abc' (3 bytes)
+Pos/Size: 3 / 3   Value: 'abc'
+
+Writing 'def' (3 bytes)
+Pos/Size: 6 / 6   Value: 'abcdef'
+
+Writing '1234567890' (10 bytes)
+Pos/Size: 16 / 16   Value: 'abcdef1234567890'
+
+Seeking to 8
+Writing 'blah' (4 bytes)
+Pos/Size: 12 / 16   Value: 'abcdef12blah7890'
+
+Writing '12345' (5 bytes)
+Pos/Size: 17 / 17   Value: 'abcdef12blah12345'
+
+Pointer-writing 'ABCD' at position 1
+Pos/Size: 17 / 17   Value: 'aABCDf12blah12345'
+
+Pointer-writing '9999' at position 17
+Pos/Size: 17 / 21   Value: 'aABCDf12blah123459999'
+
+Writing 'xxx' (3 bytes)
+Pos/Size: 20 / 21   Value: 'aABCDf12blah12345xxx9'
+
