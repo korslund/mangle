@@ -33,6 +33,9 @@ class OutFileStream : public StdOStream
         throw std::runtime_error("OutFileStream: failed to open file " + name);
     }
   ~OutFileStream() { file.close(); }
+
+  static StreamPtr Open(const std::string &name)
+  { return StreamPtr(new OutFileStream(name)); }
 };
 
 typedef boost::shared_ptr<OutFileStream> OutFileStreamPtr;

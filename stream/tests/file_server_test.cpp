@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-  StreamPtr inp(new FileStream("file_server_test.cpp"));
+  StreamPtr inp = FileStream::Open("file_server_test.cpp");
 
   char buf[21];
   buf[20] = 0;

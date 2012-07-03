@@ -143,6 +143,9 @@ public:
       // Inform caller that writing failed
       return -1;
 
+    // Flush the client stream as well
+    client->flush();
+
     // Reset output buffer pointers
     setp(buf, buf+BSIZE);
 

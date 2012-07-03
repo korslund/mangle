@@ -29,6 +29,9 @@ class StringWriter : public Stream
     isReadable = false;
   }
 
+  static StreamPtr Open(std::string &out)
+  { return StreamPtr(new StringWriter(out)); }
+
   size_t write(const void* buf, size_t len)
   {
     out.append((const char*)buf, len);

@@ -25,6 +25,9 @@ class OgreStream : public Stream
     hasSize = true;
   }
 
+  static StreamPtr Open(Ogre::DataStreamPtr inp)
+  { return StreamPtr(new OgreStream(inp)); }
+
   size_t read(void *buf, size_t count) { return inp->read(buf,count); }
   void seek(size_t pos) { inp->seek(pos); }
   size_t tell() const { return inp->tell(); }

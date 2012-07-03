@@ -24,6 +24,9 @@ class FileStream : public StdStream
         throw std::runtime_error("FileStream: failed to open file " + name);
     }
   ~FileStream() { file.close(); }
+
+  static StreamPtr Open(const std::string &name)
+  { return StreamPtr(new FileStream(name)); }
 };
 
 typedef boost::shared_ptr<FileStream> FileStreamPtr;

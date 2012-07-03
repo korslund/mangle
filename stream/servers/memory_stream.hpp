@@ -34,6 +34,9 @@ class MemoryStream : public Stream
     hasPtr = true;
   }
 
+  static MemoryStreamPtr Open(const void *ptr, size_t len)
+  { return MemoryStreamPtr(new MemoryStream(ptr, len)); }
+
   MemoryStream()
     : data(NULL), length(0), pos(0)
   {
