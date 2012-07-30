@@ -1,0 +1,8 @@
+lim=0 size=11 pos=0 left=11 wrote=11 result='hello world'
+lim=0 size=11 pos=0 left=11 wrote=11 result='hello world'
+lim=0 size=11 pos=0 left=11 wrote=11 result='hello world'
+lim=0 size=11 pos=4 left=7 wrote=7 result='o world'
+lim=0 size=11 pos=4 left=7 wrote=7 result='o world'
+lim=6 size=11 pos=1 left=10 wrote=6 result='ello w'
+lim=6 size=11 pos=1 left=10 wrote=6 result='ello w'
+lim=6 size=11 pos=1 left=10 wrote=6 result='ello w'

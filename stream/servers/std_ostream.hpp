@@ -31,7 +31,7 @@ class StdOStream : public Stream
   size_t write(const void* buf, size_t len)
   {
     inf->write((const char*)buf, len);
-    if(inf->fail())
+    if(inf->bad())
       fail("error writing to stream");
     // Just return len, but that is ok. The only cases where we would
     // return less than len is when an error occured.
