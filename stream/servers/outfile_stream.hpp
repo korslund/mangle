@@ -32,10 +32,21 @@ class OutFileStream : public StdOStream
       if(file.fail())
         throw std::runtime_error("OutFileStream: failed to open file " + name);
     }
-  ~OutFileStream() { file.close(); }
+  ~OutFileStream() { flush(); file.close(); }
 
   static StreamPtr Open(const std::string &name)
   { return StreamPtr(new OutFileStream(name)); }
+
+  // Write a buffer directly to a file
+  static size_t Write(const std::string &file, const void *ptr, size_t count)
+  { return Open(file)->write(ptr,count); }
+
+  /* Convenience function to write a string to a file. Note that
+     newlines are NOT automatically included, you have to add those to
+     the string yourself.
+  */
+  static size_t Write(const std::string &file, const std::string &data)
+  { return Write(file, data.c_str(), data.size()); }
 };
 
 typedef boost::shared_ptr<OutFileStream> OutFileStreamPtr;

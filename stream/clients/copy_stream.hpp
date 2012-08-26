@@ -8,7 +8,7 @@ namespace Mangle {
 namespace Stream {
 
   /** CopyStream::copy() is a convencience function that reads from
-      one stream and write to another.
+      one stream and writes to another.
 
       It's wrapped as a header-only static struct function for easier
       compiler setup.
