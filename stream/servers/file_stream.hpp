@@ -27,6 +27,11 @@ class FileStream : public StdStream
 
   static StreamPtr Open(const std::string &name)
   { return StreamPtr(new FileStream(name)); }
+
+  // Convenience function to read a buffer directly from a file, then
+  // close it
+  static size_t Read(const std::string &file, void *ptr, size_t count)
+  { return Open(file)->read(ptr, count); }
 };
 
 typedef boost::shared_ptr<FileStream> FileStreamPtr;

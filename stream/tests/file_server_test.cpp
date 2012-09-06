@@ -14,5 +14,10 @@ int main()
   inp->read(buf, 20);
   cout << "First 20 bytes: " << buf << endl;
   cout << "pos=" << inp->tell() << " eof=" << inp->eof() << endl;
+  inp.reset();
+
+  char c;
+  FileStream::Read("file_server_test.cpp", &c, 1);
+  cout << "First char of file: " << c << endl;
   return 0;
 }
