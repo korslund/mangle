@@ -29,6 +29,7 @@ class StdStream : public Stream
 
   size_t read(void* buf, size_t len)
   {
+    inf->clear();
     inf->read((char*)buf, len);
     if(inf->bad())
       fail("error reading from stream");
@@ -49,6 +50,7 @@ class StdStream : public Stream
 
   size_t size() const
   {
+    inf->clear();
     // Use the standard iostream size hack, terrible as it is.
     std::streampos pos = inf->tellg();
     inf->seekg(0, std::ios::end);

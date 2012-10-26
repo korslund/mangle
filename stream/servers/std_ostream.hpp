@@ -30,6 +30,7 @@ class StdOStream : public Stream
 
   size_t write(const void* buf, size_t len)
   {
+    inf->clear();
     inf->write((const char*)buf, len);
     if(inf->bad())
       fail("error writing to stream");
@@ -45,6 +46,7 @@ class StdOStream : public Stream
 
   void seek(size_t pos)
   {
+    inf->clear();
     inf->seekp(pos);
     if(inf->fail())
       fail("seek error");
@@ -56,6 +58,7 @@ class StdOStream : public Stream
 
   size_t size() const
   {
+    inf->clear();
     // Use the standard iostream size hack, terrible as it is.
     std::streampos pos = inf->tellp();
     inf->seekp(0, std::ios::end);
