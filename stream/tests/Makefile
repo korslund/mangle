@@ -1,6 +1,6 @@
 GCC=g++ -I../ -Wall -Werror
 
-all: memory_server_test buffer_filter_test file_server_test slice_filter_test file_write_test iostream_test cap_test buffer_writer_test copy_test
+all: memory_server_test buffer_filter_test file_server_test slice_filter_test file_write_test iostream_test cap_test buffer_writer_test copy_test string_stream_test
 
 # CURRENTLY DISABLED for dependency reasons (the examples should be OK)
 # ogre_client_test audiere_client_test
@@ -25,6 +25,9 @@ file_write_test: file_write_test.cpp ../stream.hpp ../servers/outfile_stream.hpp
 	$(GCC) $< -o $@
 
 memory_server_test: memory_server_test.cpp ../stream.hpp ../servers/memory_stream.hpp
+	$(GCC) $< -o $@
+
+string_stream_test: string_stream_test.cpp ../stream.hpp ../servers/memory_stream.hpp ../servers/string_stream.hpp
 	$(GCC) $< -o $@
 
 buffer_filter_test: buffer_filter_test.cpp ../stream.hpp ../servers/memory_stream.hpp ../filters/buffer_stream.hpp
