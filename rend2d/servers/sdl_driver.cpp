@@ -248,6 +248,16 @@ void SDLDriver::setGamma(float red, float green, float blue)
   SDL_SetGamma(red,green,blue);
 }
 
+Sprite *SDLDriver::createSprite(const void *data, int width, int height,
+                                int bpp, int pitch,
+                                int redmask, int greenmask, int bluemask,
+                                int alphamask)
+{
+  SDL_Surface* surf = SDL_CreateRGBSurfaceFrom((void*)data, width, height, bpp, pitch,
+                                               redmask, greenmask, bluemask, alphamask);
+  return spriteFromSDL(surf);
+}
+
 /// Convert an existing SDL surface into a sprite
 Sprite* SDLDriver::spriteFromSDL(SDL_Surface *surf, bool autoFree)
 {

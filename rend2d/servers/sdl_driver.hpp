@@ -95,6 +95,12 @@ namespace Mangle
       /// SDL_image.
       Sprite* loadImage(const void* data, size_t size);
 
+      /// Create sprite from pixel data.
+      Sprite *createSprite(const void *data, int width, int height,
+                           int bpp, int pitch,
+                           int redmask, int greenmask, int bluemask,
+                           int alphamask);
+
       /// Set gamma value
       void setGamma(float gamma) { setGamma(gamma,gamma,gamma); }
 

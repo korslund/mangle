@@ -42,6 +42,12 @@ namespace Mangle
       /// exception on failure.
       virtual Sprite* loadImage(const void* data, size_t size) = 0;
 
+      /// Create sprite from pixel data. May return NULL if not supported.
+      virtual Sprite *createSprite(const void *data, int width, int height,
+                                   int bpp, int pitch,
+                                   int redmask, int greenmask, int bluemask,
+                                   int alphamask) { return NULL; }
+
       /** @brief Set gamma value for all colors.
 
           Note: Setting this in windowed mode will affect the ENTIRE
